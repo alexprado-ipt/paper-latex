@@ -1,5 +1,5 @@
 % \documentclass[AMA,Times1COL]{WileyNJDv5}
-\documentclass[LATO2COL,table]{WileyNJDv5}
+\documentclass[LATO2COL]{WileyNJDv5}
 
 \articletype{Original Research}%
 
@@ -19,6 +19,7 @@
 \usepackage{enumitem}
 \usepackage{xcolor}
 \usepackage{booktabs}
+\usepackage{float}
 \setmainfont[
   BoldFont={Arial-BoldMT.ttf},
   ItalicFont={Arial-ItalicMT.ttf},
@@ -46,10 +47,12 @@
 
 \corres{Alex Prado, Instituto de Pesquisas Tecnológicas do Estado de São Paulo \email{alex.prado@ensino.ipt.br}}
 
-%\fundingInfo{Text}
-%\JELinfo{ejlje}
 
-\abstract[Abstract]{The insurance industry faces challenges such as fraud detection and prevention, as well as protecting against malicious policy participants. As a financial tool, an insurance policy serves as a guarantee against financial losses resulting from specific events, such as accidents, property damage, illnesses, or death. To meet these challenges, insurers must adapt to modern technologies such as blockchain to combat fraud and optimize policy management. The adoption of blockchain and smart contracts is accelerating, with a forecasted commercial value of approximately USD 3.1 trillion by 2030. Smart contracts can find potential application scenarios in the digital economy and smart industries and are integrated into major blockchain-based development platforms. However, there are limitations to the practical use of these methods for the following reasons: low transactions per second (TPS), block size issues, chain size growth, and electronic signature sizes. Thus, this dissertation aims to propose a solution based on private blockchain using smart contracts to support automatic decision-making in the insurance policy sales process, considering the contracts negotiated between insurers and policyholders. The research methodology consists of two main stages: a systematic literature review to gain a broad understanding of the problem and experimental research with a quantitative approach to implement and evaluate the proposed solution. The expected contributions were to add to the scientific literature applications of decision-making with smart contracts in the blockchain network in the insurance industry and to present an implementation proposal for a blockchain-based system applied to insurance policy sales operations with support for automatic decision-making.}
+\abstract[Abstract]{The insurance industry continues to face persistent challenges related to fraud detection and prevention, as well as risks arising from opportunistic and malicious actors. Insurance policies function as financial risk-transfer instruments designed to compensate losses caused by adverse events, such as accidents, property damage, illness, or death.
+To address these challenges, insurers are increasingly adopting emerging digital technologies, particularly blockchain, to enhance transparency, security, auditability, and operational efficiency across the policy lifecycle. Blockchain-based architectures, combined with smart contracts for the automated execution and enforcement of policy terms, are gaining momentum, with their commercial value projected to reach approximately USD~3.1~trillion by 2030. Smart contracts enable deterministic execution of contractual rules and have become increasingly relevant in digital economy and smart industry applications.
+Despite their potential, large-scale adoption remains constrained by technical limitations, including low transaction throughput, block size restrictions, ledger growth, and cryptographic overhead. In this context, this work proposes a solution based on a private blockchain architecture employing smart contracts to support automated decision-making in the insurance policy sales process, considering contractual relationships between insurers and policyholders.
+The research methodology comprises two stages: a systematic literature review to establish a comprehensive understanding of blockchain-based solutions in insurance, followed by an experimental study with a quantitative approach to implement and evaluate the proposed system. The expected contributions include advancing the literature on smart contract-driven decision-making in insurance and presenting a practical, secure, and auditable blockchain-based solution for automating insurance policy sales.}
+
 
 \keywords{Blockchain, Smart contracts, Insurance Policy, Decision-making, Insurance Sales}
 
@@ -110,271 +113,208 @@ O objetivo principal deste artigo é propor o uso do blockchain e contratos inte
 
 \section{Trabalhos correlatos}\label{sec2}
 
-A adoção de blockchain e contratos inteligentes pode transformar o setor de seguros, promovendo automação, transparência e redução de custos \cite{Shetty2022},\cite{Aleksieva2020},\cite{Xiao2020}. Apesar das oportunidades, desafios como integração com sistemas legados, escalabilidade, conformidade regulatória e adaptação dos envolvidos ainda precisam ser superados \cite{Aleksieva2020b},\cite{Bai2022}. O uso de plataformas como Hyperledger Fabric e Ethereum permite flexibilidade, mas exige análise dos custos e impactos operacionais \cite{Aleksieva2020c},\cite{LIU2019}.
+A adoção de tecnologias baseadas em blockchain e contratos inteligentes é amplamente reconhecida como um fator de transformação no setor de seguros, com potencial para automação, aumento da transparência e redução de custos operacionais \cite{Shetty2022,Aleksieva2020,Xiao2020}. Essas tecnologias possibilitam o registro imutável de informações e a execução automática de regras contratuais, reduzindo a dependência de intermediários. Plataformas como Ethereum e Hyperledger Fabric têm sido empregadas em diferentes contextos, oferecendo flexibilidade para o desenvolvimento de aplicações descentralizadas no domínio de seguros \cite{Aleksieva2020c,LIU2019}.
+
+Apesar do interesse crescente, a adoção dessas soluções enfrenta desafios técnicos e organizacionais, incluindo integração com sistemas legados, limitações de escalabilidade, conformidade regulatória e adaptação de seguradoras, corretores e clientes a ambientes digitais \cite{Aleksieva2020b,Bai2022}.
 
 \subsection{Desafios e Oportunidades na Indústria de Seguros}\label{sec2.1}
-O mercado de seguros está em constante transformação, exigindo das empresas adaptação às inovações tecnológicas. A sobrevivência das seguradoras depende da adoção de tecnologias emergentes, como inteligência artificial (IA) e blockchain, para evitar disrupções e manter a competitividade. A blockchain, como tecnologia de banco de dados compartilhado, oferece transparência, rastreabilidade e imutabilidade, além de permitir o desenvolvimento de novos produtos e aprimorar a detecção de fraudes por meio de contratos inteligentes. Contudo, a interface entre o mundo físico e o digital pode ser um ponto frágil, dificultando a plena confiança digital no setor \cite{Shetty2022}.
 
-Apesar do potencial da blockchain, Shetty \cite{Shetty2022} não aprofunda desafios como obstáculos regulatórios, integração com sistemas legados e preparação de corretores e clientes para ambientes digitalizados. Aleksieva \cite{Aleksieva2020b} reforça que o uso da blockchain visa tornar a compra e venda de apólices mais eficiente, reduzindo custos e aumentando a transparência. Contratos inteligentes, especialmente os baseados em Ethereum, trouxeram automação e flexibilidade, mas os autores não discutem suficientemente desafios operacionais, como compliance, segurança, governança e custos de blockchains públicos.
+O setor de seguros passa por uma transformação contínua impulsionada por inovações tecnológicas, exigindo das seguradoras soluções que garantam competitividade e eficiência operacional. Tecnologias como blockchain e inteligência artificial são apontadas como estratégicas nesse contexto. A blockchain, enquanto banco de dados distribuído, oferece transparência, rastreabilidade e imutabilidade, além de viabilizar a automação de processos por meio de contratos inteligentes \cite{Shetty2022}.
 
-A blockchain resolve problemas de confiança e permite automação de processos, porém Xiao \cite{Xiao2020} não detalha desafios na venda de apólices, como complexidade dos contratos inteligentes, adaptação regulatória e interoperabilidade. Aleksieva \cite{Aleksieva2020} destaca a modernização do setor com blockchain, mas trata superficialmente questões de escalabilidade e processamento de transações, além de não abordar como contratos inteligentes lidam com variáveis subjetivas e regulamentações locais.
-
-No seguro agrícola, Bai \cite{Bai2022} mostra que blockchain e IoT podem evitar manipulação de dados e reduzir erros em pagamentos de sinistros, mas não discute a complexidade de integrar blockchain em ambientes com múltiplos participantes. Liu \cite{LIU2019} sugere o uso de blockchain para aprimorar o seguro-viagem, mas não detalham sua aplicação na venda de apólices. Aleksieva \cite{Aleksieva2020c} e Klapkiv \cite{Klapkiv2022} ressaltam que blockchains permissionadas podem resolver questões de privacidade, mas falta análise prática sobre sua aplicação na venda de apólices.
-
+Estudos indicam que a blockchain pode favorecer o desenvolvimento de novos produtos, aprimorar a detecção de fraudes e aumentar a confiabilidade das informações registradas. Aleksieva \cite{Aleksieva2020b} destaca seu uso para tornar os processos de compra e venda de apólices mais eficientes, reduzindo custos e ampliando a transparência. Outros trabalhos discutem sua aplicação na automação de processos e na mitigação de problemas de confiança no setor \cite{Xiao2020}. No contexto de seguros agrícolas, a integração entre blockchain e IoT é explorada para reduzir erros em pagamentos de sinistros \cite{Bai2022}, enquanto Liu \cite{LIU2019} aborda sua aplicação em seguros de viagem. Estudos adicionais ressaltam o uso de blockchains permissionadas para atender a requisitos de privacidade e controle de acesso \cite{Aleksieva2020c,Klapkiv2022}.
 
 \subsection{Aplicações de Blockchain e Contratos Inteligentes na Indústria de Seguros}\label{sec2.2}
-A blockchain oferece amplas oportunidades para o setor de seguros, incluindo os casos de uso a seguir:
 
-\renewcommand{\labelitemi}{\tiny$\bullet$}
-\begin{itemize}
-    \item Seguro de viagem e de vida com pagamentos imediatos;
-    \item Automação e simplificação do gerenciamento de sinistros;
-    \item Jornada de sinistros mais clara em seguros de acidentes pessoais;
-    \item Manutenção eficiente de registros;
-    \item Automação de resseguros via contratos inteligentes;
-    \item Digitalização de identidades;
-    \item Seguros peer-to-peer sem intermediários
-    \item Acesso em tempo real a informações sobre títulos de garantia.
-\end{itemize}
-\renewcommand{\labelitemi}{\textbullet}
+A literatura apresenta diversos casos de uso da blockchain no setor de seguros, abrangendo desde seguros de viagem e vida com pagamentos automatizados até a automação de resseguros, gerenciamento de sinistros, digitalização de identidades e seguros peer-to-peer \cite{Shetty2022}. Os contratos inteligentes são apontados como elementos centrais para a automação de processos, permitindo a execução automática de cláusulas contratuais e a redução de disputas.
 
-O uso da blockchain no setor de seguros pode aumentar eficiência, transparência e satisfação do cliente, abrangendo desde seguros de viagem e vida até gerenciamento de sinistros e identidade digital \cite{Shetty2022}. No entanto, faltam discussões sobre desafios práticos, como integração com sistemas legados, implicações regulatórias e proteção de dados. Grandes seguradoras já exploram a tecnologia, mas questões econômicas e de privacidade permanecem pouco abordadas \cite{Xiao2020}. Contratos inteligentes podem automatizar sinistros, mas dependem de sistemas seguros e auditáveis \cite{Aleksieva2020}.
-
-O texto destaca que Aleksieva \cite{Aleksieva2020} apresenta benefícios do blockchain e contratos inteligentes no processamento de sinistros, citando exemplos como o uso da tecnologia \textit{Corda} pela \textit{Cat XoL Property Catastrophe Excess of Loss Reassurance} e a plataforma \textit{Etherisc}. No entanto, não aborda suficientemente as vantagens dessas tecnologias na venda de apólices, como automação de propostas e execução transparente de contratos, nem discute integração com sistemas legados ou interoperabilidade entre plataformas.
-
-Aleksieva \cite{Aleksieva2020b} explora plataformas inovadoras como \textit{Nexus Mutual}, \textit{Insureum} e \textit{Savemyluggage}, que oferecem produtos de seguros especializados via contratos inteligentes. Apesar de demonstrar a versatilidade do blockchain, o texto não aprofunda como essas soluções podem transformar a venda de apólices tradicionais, nem analisa custos de implementação ou impactos na negociação com corretores e clientes.
-
-Bai \cite{Bai2022} ressalta a integração de IoT e blockchain, destacando benefícios como detecção de fraudes e automação de pagamentos, mas foca no setor agrícola e não explora desafios e oportunidades específicos da venda de apólices.
-
-Liu \cite{LIU2019} discute o uso do blockchain em seguros de viagem para garantir integridade de dados, mas limita-se à proteção de informações transacionais, sem abordar o potencial dos contratos inteligentes na venda de apólices.
-
+Aleksieva \cite{Aleksieva2020} descreve aplicações da blockchain no processamento de sinistros, citando plataformas como Corda e Etherisc, enquanto Aleksieva \cite{Aleksieva2020b} explora iniciativas como Nexus Mutual, Insureum e Savemyluggage. Outros estudos analisam a integração entre blockchain e IoT, destacando benefícios como automação de pagamentos e detecção de fraudes, especialmente em domínios específicos \cite{Bai2022}. Liu \cite{LIU2019} enfatiza o uso da blockchain em seguros de viagem com foco na integridade e proteção de dados transacionais.
 
 \subsection{Implementação de Blockchain e Contratos Inteligentes}\label{sec2.3}
 
-Algoritmos criptográficos e processos digitais sofisticados são essenciais para proteger informações e garantir a autenticidade das transações. Os contratos inteligentes, possuem quatro características principais: formulário digital, cláusulas embutidas no código, desempenho controlado tecnologicamente e execução ininterrupta, salvo condições não atendidas. Embora reconheçam os benefícios desses contratos para segurança e automação, apontam-se desafios na aplicação prática ao setor de seguros, como a necessidade de flexibilidade para lidar com exceções, a importância da intervenção humana em disputas e exigências regulatórias, e a adaptação cultural e tecnológica de seguradoras e clientes \cite{Shetty2022}.
+A implementação de soluções baseadas em blockchain e contratos inteligentes requer algoritmos criptográficos e processos digitais avançados para garantir segurança, autenticidade e integridade das transações. Os contratos inteligentes caracterizam-se por sua representação digital, incorporação de cláusulas contratuais em código e execução automatizada condicionada ao cumprimento das regras definidas \cite{Shetty2022}.
 
-O Hyperledger Fabric é apresentado por Aleksieva \cite{Aleksieva2020} como uma plataforma blockchain adequada para consórcios empresariais, destacando sua flexibilidade e capacidade de adaptação. Contudo, o texto não aprofunda os desafios operacionais e de interoperabilidade na venda de apólices, como a coordenação entre múltiplos participantes e a integração com sistemas legados. A flexibilidade do Hyperledger Fabric é destacada por Aleksieva \cite{Aleksieva2020}, mas como a tecnologia pode melhorar o relacionamento com o cliente final e personalizar apólices, não é apresentado, além de não discutir questões de privacidade e custos operacionais ao comparar Hyperledger e Ethereum.
-
-Xiao et al. (2020) propõem a integração de IoT e blockchain para seguros de veículos, permitindo preços dinâmicos e customizados. No entanto, não detalham como essa integração pode otimizar a venda de apólices, nem abordam desafios como interoperabilidade entre blockchains públicos e privados e custos de transação.
-
-Bai et al. (2022) destacam o impacto positivo do blockchain na automação de processos internos, como o pagamento de sinistros e prevenção de fraudes, mas não aprofundam a aplicação na venda de apólices, nem discutem desafios como integração com sistemas legados e conformidade regulatória.
-
-Liu et al. (2019) ressaltam a eficiência dos contratos inteligentes, mas alertam para riscos de erros irreversíveis. O texto sugere que seria importante discutir mecanismos de revisão e validação, além de explorar a automação de todo o ciclo de venda de apólices.
-
-Por fim, Klapkiv e Kedra (2022) observam que os benefícios das inovações tecnológicas variam conforme o momento de implementação e o porte da empresa, mas não abordam desafios específicos do setor de seguros, como integração tecnológica e proteção de dados sensíveis.
-
+Plataformas permissionadas, como o Hyperledger Fabric, são apresentadas como adequadas para ambientes corporativos e consórcios empresariais, devido à sua flexibilidade e capacidade de adaptação \cite{Aleksieva2020}. Outros trabalhos discutem a integração entre blockchain e IoT para seguros de veículos, possibilitando modelos de precificação dinâmica \cite{LIU2019}. Estudos adicionais destacam os impactos positivos da blockchain na automação de processos internos, como pagamento de sinistros e prevenção de fraudes, bem como a influência do porte organizacional e do momento de adoção nos benefícios obtidos \cite{Bai2022,Klapkiv2022}.
 
 \subsection{Escalabilidade no Processamento de Transações da Blockchain}\label{sec2.4}
-Segundo Shetty et al. (2022), a implementação de contratos inteligentes oferece oportunidades para inovação e melhoria de desempenho nas empresas, como maior envolvimento do cliente, automação de pagamentos e prevenção de disputas. ALEKSIEVA et al. (2020a) complementa que a blockchain otimiza processos de resseguro e operações de corretoras, além de melhorar o monitoramento em áreas como medicamentos e seguros de saúde.
 
-No entanto, há limitações importantes quanto à escalabilidade das redes públicas de blockchain, como Bitcoin e Ethereum, que apresentam baixo desempenho em termos de transações por segundo (TPS), com Ethereum atingindo apenas cerca de 15 a 20 TPS. Isso é insuficiente para grandes volumes de vendas de apólices. Blockchains privadas ou permissionadas, como Hyperledger Fabric, são mais adequadas para cenários de alto TPS, mas o texto não aprofunda como garantir desempenho sem comprometer segurança e transparência. A integração entre blockchain e IoT é vista como promissora para escalabilidade e privacidade, mas faltam análises específicas sobre sua aplicação na venda de apólices, especialmente quanto ao processamento rápido de transações e proteção de dados sensíveis dos segurados.
+A escalabilidade constitui um dos principais desafios para a adoção de blockchain no setor de seguros. Contratos inteligentes podem impulsionar a inovação, automatizar pagamentos e melhorar o relacionamento com clientes \cite{Shetty2022}, além de otimizar processos de resseguro e operações de corretoras \cite{Aleksieva2020}. No entanto, blockchains públicas, como Bitcoin e Ethereum, apresentam limitações de desempenho em termos de transações por segundo, o que pode comprometer aplicações com alto volume transacional.
 
-Xiao et al. (2020) propõe um modelo híbrido entre Hyperledger Fabric e Ethereum para equilibrar desempenho e funcionalidades, sugerindo o agendamento de processos complexos em horários de menor demanda. Contudo, essa abordagem pode não ser ideal para vendas de apólices, que exigem respostas em tempo real, principalmente em vendas online ou campanhas de marketing. O uso de Oracles para integrar dados externos é prático, mas traz preocupações quanto à confiabilidade e segurança, que não são abordadas no texto. Tecnologias como sharding e rollups poderiam ser discutidas como alternativas para garantir processamento eficiente sem comprometer a experiência do cliente.
+Nesse contexto, blockchains privadas ou permissionadas, como o Hyperledger Fabric, são frequentemente apontadas como alternativas mais adequadas para cenários que exigem maior eficiência transacional \cite{Xiao2020}. A integração entre blockchain e IoT é considerada promissora para aprimorar escalabilidade e privacidade, sendo discutidos modelos híbridos que combinam diferentes plataformas \cite{Xiao2020,Aleksieva2020b}. Estudos também destacam o uso de IoT para coleta de dados em tempo real e a importância de mecanismos robustos de segurança e rastreabilidade para mitigação de fraudes \cite{Bai2022,LIU2019}. A evolução das tecnologias de blockchain e seu potencial para reduzir assimetrias de informação e custos de transação no setor de seguros são analisados em trabalhos recentes \cite{Aleksieva2020c,Klapkiv2022}.
 
-ALEKSIEVA et al. (2020b) destaca as vantagens das blockchains privadas, como custos operacionais mais baixos e validação rápida de transações, mas não explora os desafios de escalabilidade em grandes volumes de vendas. A falta de interoperabilidade pode criar silos de dados e dificultar a automação completa de processos. O uso de blockchains públicas para pagamentos automáticos vinculados a criptomoedas também não considera a volatilidade dessas moedas, um obstáculo para adoção em larga escala.
+\subsection{Análise Crítica dos Trabalhos Correlatos}
 
-Bai et al. (2022) enfatiza o potencial da IoT para coleta de dados em tempo real, personalização de produtos e mitigação de riscos, especialmente no setor agrícola. A colaboração entre IoT e blockchain pode resolver problemas de segurança, escalabilidade e confiabilidade, mas o foco está no processamento de sinistros, não na venda de apólices. Soluções como sharding, sidechains ou redes híbridas poderiam ser exploradas para garantir escalabilidade na venda de apólices.
+A literatura concentra-se predominantemente na automação de sinistros, na rastreabilidade de dados e na redução de custos operacionais, dedicando atenção limitada às fases iniciais do ciclo de vida do seguro, especialmente à comercialização e emissão de apólices. Embora contratos inteligentes sejam amplamente mencionados, poucos estudos detalham sua aplicação na automação integrada de propostas, negociações e formalização de contratos.
 
-Liu et al. (2019) ressalta a segurança e rastreabilidade do blockchain, essenciais para combater fraudes no setor de seguros. Entretanto, não aborda como lidar com grandes volumes de transações na venda de apólices, nem como contratos inteligentes podem otimizar esse processo em tempo real.
+Observa-se também uma lacuna quanto à avaliação empírica da integração entre plataformas blockchain e sistemas legados de seguradoras e corretoras, bem como à definição de mecanismos de governança e gestão de identidades em ambientes multiatores. Além disso, aspectos relacionados ao controle de acesso e à segurança entre diferentes perfis de usuários permanecem pouco explorados.
 
-ALEKSIEVA et al. (2020c) traça a evolução do blockchain desde o Bitcoin, destacando aplicações em diversos setores, incluindo seguros, com foco na otimização de sinistros e redução de custos. Falta, porém, análise sobre escalabilidade e automação na venda de apólices, ponto central da dissertação.
-
-Por fim, Klapkiv e Kedra (2022) discutem a redução da assimetria de informações e custos de transação via tecnologias, mas concentram-se nas economias pós-venda, sem abordar como contratos inteligentes podem transformar a emissão e assinatura de apólices. Soluções como blockchains híbridas ou sidechains poderiam ser exploradas para processar grandes volumes de transações de forma eficiente.
-
+As questões de escalabilidade são frequentemente tratadas de forma genérica, sem foco nos requisitos de desempenho associados à venda de apólices em tempo real. Tecnologias como redes híbridas e mecanismos avançados de escalabilidade são citadas, mas raramente avaliadas no contexto específico da emissão e venda de apólices. Diante dessas lacunas, este trabalho propõe uma aplicação descentralizada baseada em blockchain permissionada para a automação segura e auditável da venda de seguro viagem, integrando controle de acesso, verificação de integridade dos dados e soluções de escalabilidade compatíveis com as exigências operacionais do setor.
 
 
 \section{Definição da Arquitetura Descentralizada}\label{sec3}
 
-Nesta seção do artigo, delimita-se a aplicação da tecnologia blockchain no domínio de seguros, especificamente para o processamento de vendas de apólices, com suporte ao registro de transações por meio de contratos inteligentes.
+Esta seção descreve a aplicação da tecnologia blockchain no domínio de seguros, com foco específico no processamento da venda de apólices por meio de contratos inteligentes e no registro descentralizado das transações.
 
-O diagrama de arquitetura apresentado, na Figura \ref{fig:fig3}, adota uma abordagem descentralizada, estruturada de forma técnica para suportar uma aplicação baseada na blockchain Hyperledger Fabric voltada à comercialização de apólices de seguro. Essa perspectiva técnica é essencial para demonstrar com clareza os componentes, camadas e fluxos envolvidos na validação e registro de transações via contratos inteligentes, promovendo a transparência, segurança e rastreabilidade inerentes ao contexto do seguro.
+O diagrama de arquitetura apresentado na Figura~\ref{fig:fig3} adota uma abordagem descentralizada e foi projetado para suportar uma aplicação baseada na plataforma Hyperledger Fabric, voltada à comercialização de apólices de seguro. Essa perspectiva técnica permite identificar, de forma clara, os principais componentes, camadas e fluxos envolvidos na validação e no registro das transações, assegurando propriedades essenciais ao setor de seguros, como transparência, segurança e rastreabilidade.
 
-A arquitetura detalha as interações entre os nós da rede, a infraestrutura Hyperledger Fabric, os contratos inteligentes e os mecanismos de validação, evidenciando como esses elementos se integram para garantir a confiabilidade e integridade do sistema através dos seguintes componentes:
-
-\begin{itemize}
-    \item insurance-sales-api: API de vendas de seguros representado em azul, este componente é a interface da aplicação que gerencia as transações relacionadas à venda de apólices de seguro. Ele atua como o ponto de entrada para os usuários e sistemas externos, facilitando a comunicação com a rede blockchain;
-\end{itemize}
+A arquitetura especifica as interações entre a aplicação cliente, a infraestrutura Hyperledger Fabric, os contratos inteligentes e os mecanismos de validação distribuída, evidenciando como esses elementos se integram para garantir a confiabilidade e a integridade do sistema. Os principais componentes são descritos a seguir.
 
 \begin{itemize}
-    \item Gateway: composto por dois contratos inteligentes, um para o peer0-org1 e outro para peer0-org2, este módulo serve como um intermediário entre a API de vendas de seguros e a infraestrutura Hyperledger Fabric. Os contratos inteligentes contêm a lógica de negócios necessária para validar e registrar transações na blockchain;
-\end{itemize}
-
-\begin{itemize}
-    \item Org1 e Org2: a rede Hyperledger Fabric é composta por duas organizações, cada uma com seus próprios peers e funções específicas:
+    \item \textit{Insurance-Sales-API}: interface da aplicação responsável pelo gerenciamento das transações relacionadas à venda de apólices de seguro. Esse componente atua como ponto de entrada para usuários e sistemas externos, permitindo a comunicação com a rede blockchain.
+    
+    \item \textit{Gateway}: módulo intermediário entre a API de vendas e a infraestrutura Hyperledger Fabric, composto por contratos inteligentes associados aos peers \textit{peer0-org1} e \textit{peer0-org2}. Esses contratos encapsulam a lógica de negócio necessária para validação e registro das transações na blockchain.
+    
+    \item \textit{Organizações da Rede}: a rede Hyperledger Fabric é composta por duas organizações, cada uma com funções específicas:
     \begin{itemize}
-        \item Organização 1 (Org1 - Seguradora): representa a seguradora, a entidade responsável por definir e gerenciar as regras de elegibilidade para a aquisição das apólices de seguro;
-    \end{itemize}     
-    \begin{itemize}
-        \item O peer peer0-org1 armazena o ledger da organização e executa os contratos inteligentes relacionados às políticas da seguradora;
+        \item \textit{Organização 1 (Org1 -- Seguradora)}: representa a seguradora responsável por definir e gerenciar as regras de elegibilidade e validação das apólices. O peer \textit{peer0-org1} mantém o ledger da organização e executa os contratos inteligentes relacionados às políticas da seguradora.
+        
+        \item \textit{Organização 2 (Org2 -- Corretor de Seguros)}: representa o corretor de seguros, responsável pela intermediação das vendas. O peer \textit{peer0-org2} mantém uma cópia do ledger e executa contratos inteligentes voltados à validação e à intermediação das transações.
     \end{itemize}
+    
+    \item \textit{Infraestrutura Hyperledger Fabric}: compreende os elementos centrais da rede blockchain, incluindo:
     \begin{itemize}
-        \item Conecta-se ao Gateway, garantindo a execução das regras de negócio antes do registro da transação na blockchain;
-    \end{itemize}  
-    \begin{itemize}
-        \item Organização 2 (Org2 - Corretor de Seguros): representa um corretor de seguros e colabora na intermediação e venda de apólices;
-    \end{itemize}   
-    \begin{itemize}
-        \item O peer peer0-org2 mantém uma cópia do ledger e executa contratos inteligentes específicos para validar e intermediar as transações;
+        \item \textit{Peers} (\textit{peer0-org1} e \textit{peer0-org2}): responsáveis pela validação e armazenamento das transações no ledger distribuído, bem como pela execução dos contratos inteligentes;
+        \item \textit{Orderer}: componente responsável pela ordenação e disseminação das transações na rede, garantindo consistência e confiabilidade;
+        \item \textit{Certificate Authority (CA)}: autoridade certificadora encarregada da emissão e do gerenciamento das identidades digitais dos participantes da rede;
+        \item \textit{CouchDB}: banco de dados utilizado como repositório de estados dos peers, possibilitando consultas avançadas aos dados armazenados no ledger.
     \end{itemize}
+    
+    \item \textit{Hyperledger Explorer}: ferramenta destinada ao monitoramento e à visualização das informações registradas na rede blockchain, composta por:
     \begin{itemize}
-        \item Trabalha em conjunto com a seguradora para garantir a aplicação correta das regras;
-    \end{itemize}
-
-\end{itemize}
-
-\begin{itemize}
-    \item Infraestrutura Fabric: representa a estrutura principal da rede blockchain Hyperledger Fabric, composta pelos seguintes elementos:
-    \begin{itemize}
-        \item peer0-org1 e peer0-org2 (Peers das Organizações 1 e 2): responsáveis por validar e armazenar as transações na blockchain. Cada peer possui cópias do livro-razão (ledger) e pode executar contratos inteligentes;
-    \end{itemize}   
-    \begin{itemize}
-        \item Orderer: componente responsável pela ordenação e propagação das transações dentro da rede blockchain, garantindo a consistência e a confiabilidade dos registros;
-    \end{itemize}
-    \begin{itemize}
-        \item CA (Certificate Authority): autoridade certificadora encarregada de emitir credenciais de identidade para os participantes da rede, garantindo autenticação e segurança;
-    \end{itemize}
-    \begin{itemize}
-        \item CouchDB: banco de dados utilizado como repositório de estados para os peers, permitindo consultas avançadas e facilitando a interação com os dados armazenados no ledger;
-    \end{itemize}    
-\end{itemize}
-
-\begin{itemize}
-    \item Hyperledger Explorer: ferramenta de monitoramento e visualização dos dados e transações registradas na rede Hyperledger Fabric. Inclui:
-    \begin{itemize}
-        \item Hyperledger Explorer Console: interface gráfica que permite aos administradores e usuários visualizar transações, blocos e a estrutura da rede;
-    \end{itemize}
-    \begin{itemize}
-        \item Explorer DB: banco de dados utilizado pelo Hyperledger Explorer para armazenar e consultar informações sobre as transações e estados da blockchain.
+        \item \textit{Explorer Console}: interface gráfica para visualização de blocos, transações e topologia da rede;
+        \item \textit{Explorer DB}: banco de dados utilizado pelo Hyperledger Explorer para armazenamento e consulta das informações coletadas.
     \end{itemize}
 \end{itemize}
 
 \begin{figure}[h]
-    \centering{\includegraphics[width=1.00\linewidth]{images/proposalarchitecture.png}}
+    \centering
+    \includegraphics[width=1.00\linewidth]{images/proposalarchitecture.png}
     \caption{Diagrama de arquitetura da aplicação proposta}
     \label{fig:fig3}
 \end{figure}
 
-A rede blockchain foi criada por meio do Docker, dado que ele oferece flexibilidade para customizar a infraestrutura de acordo com a necessidade de cada container, como:
+A rede blockchain foi implantada utilizando contêineres, o que proporciona flexibilidade para a configuração e o gerenciamento da infraestrutura, permitindo ajustes como:
 \begin{enumerate}[label=\alph*)]
-    \item Localização dos nós;
-    \item CPU e RAM do hardware;
-    \item Endorsers necessários para o consenso;
-    \item Adição de novas organizações e membros à rede.
+    \item definição da localização lógica dos nós da rede;
+    \item alocação de recursos computacionais, como CPU e memória;
+    \item configuração dos peers endossadores necessários ao consenso;
+    \item inclusão de novas organizações e participantes na rede.
 \end{enumerate}
+
 
 \subsection{Etapas do Fluxo de Dados}
 
-O diagrama de fluxo de dados, apresentado na Figura \ref{fig:fig4}, ilustra o processo de compra de uma apólice de seguro, desde a solicitação inicial pelo usuário até a confirmação da apólice. A finalidade é fornecer uma visão clara e concisa de como a transação é gerenciada e monitorada dentro do sistema conforme as seguintes etapas:
-    
-\begin{enumerate}[label=\alph*)]
-    \item Usuário solicita a compra de uma apólice: a aplicação cliente acessa a aplicação insurance-sales-api para solicitar um seguro;
-    
-    \item A API de vendas envia a solicitação ao Gateway: a API envia os dados do seguro ao Gateway, que decide para qual organização direcionar a transação;
+O diagrama de fluxo de dados apresentado na Figura~\ref{fig:fig4} ilustra o processo de aquisição de uma apólice de seguro, desde a solicitação inicial do usuário até a confirmação da transação. O objetivo é fornecer uma visão clara e estruturada de como a compra da apólice é processada, validada e registrada no sistema conforme as etapas do fluxo são descritas a seguir:
 
-    \item Execução dos contratos inteligentes nos peers: o Gateway chama os contratos inteligentes nos peers (peer0-org1 e peer0-org2) para validar regras de negócios;
+\begin{enumerate}[label=\alph*)]
+    \item \textit{Solicitação da apólice}: o usuário inicia o processo de compra por meio da aplicação cliente, que envia a solicitação à \textit{insurance-sales-api};
     
-    \item Processamento da transação na blockchain: se os critérios forem atendidos, a transação é enviada ao Orderer, que a adiciona ao ledger, caso contrário, a solicitação é rejeitada;
+    \item \textit{Encaminhamento ao Gateway}: a API de vendas encaminha os dados da apólice ao Gateway, responsável por direcionar a transação à organização apropriada;
     
-    \item Armazenamento dos dados: os peers registram a apólice no ledger e no CouchDB, permitindo consultas futuras;
+    \item \textit{Execução dos contratos inteligentes}: o Gateway aciona os contratos inteligentes executados nos peers \textit{peer0-org1} e \textit{peer0-org2} para validação das regras de negócio;
     
-    \item Consulta e monitoramento via Hyperledger Explorer: a seguradora e os administradores podem visualizar as transações por meio do Hyperledger Explorer;
+    \item \textit{Processamento da transação}: caso os critérios definidos nos contratos inteligentes sejam atendidos, a transação é encaminhada ao \textit{Orderer}, que realiza sua ordenação e inclusão no ledger. Caso contrário, a solicitação é rejeitada;
     
-    \item Confirmação da apólice ao usuário: após a transação ser registrada, a API notifica o usuário sobre a conclusão do processo.
+    \item \textit{Armazenamento dos dados}: os peers registram as informações da apólice no ledger distribuído e no banco de dados \textit{CouchDB}, viabilizando consultas posteriores;
+    
+    \item \textit{Monitoramento da transação}: seguradora e administradores podem acompanhar o status da transação por meio do \textit{Hyperledger Explorer};
+    
+    \item \textit{Confirmação ao usuário}: após o registro da transação na blockchain, a API notifica o usuário quanto à conclusão do processo de compra.
 \end{enumerate}
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=1\linewidth]{images/dataflow.jpg}
-    \caption{Diagrama de Fluxo de Dados}
+    \caption{Diagrama de fluxo de dados}
     \label{fig:fig4}
 \end{figure}
 
-O fluxo apresentado na Figura \ref{fig:fig4} detalha as interações entre os diferentes componentes do sistema, incluindo a API de vendas, o Gateway, os peers da blockchain, o Orderer, o CouchDB e o Hyperledger Explorer. Cada etapa do processo é representada, mostrando como os dados são transmitidos e processados para garantir a validação e o registro da apólice de seguro.
+O fluxo apresentado na Figura~\ref{fig:fig4} evidencia as interações entre os principais componentes do sistema, incluindo a API de vendas, o Gateway, os peers da rede blockchain, o Orderer, o \textit{CouchDB} e o \textit{Hyperledger Explorer}. Cada etapa demonstra como os dados são transmitidos, validados e registrados de forma distribuída, assegurando a confiabilidade, a integridade e a rastreabilidade das informações relacionadas à apólice de seguro.
+
 
 \subsection{Adoção do Hyperledger Fabric}
 
-A adoção do Hyperledger Fabric neste artigo baseou-se no trabalho de Androulaki et al. (2018) que indica que o Hyperledger Fabric é um sistema operacional distribuído para blockchains privados que executa aplicativos distribuídos escritos em linguagens de programação de uso geral (por exemplo, Go, Java, Node.js). Ele rastreia com segurança seu histórico de execução em uma estrutura de dados e não possui criptomoeda integrada.
+A adoção do Hyperledger Fabric neste trabalho baseia-se no estudo de Androulaki \cite{Androulaki2018}, que define o Hyperledger Fabric como uma plataforma blockchain permissionada, projetada para a execução de aplicações distribuídas escritas em linguagens de programação de uso geral, como Go, Java e Node.js. A plataforma permite o rastreamento seguro do histórico de execução das transações por meio de estruturas de dados distribuídas e não possui criptomoeda nativa, característica que a torna adequada para ambientes corporativos.
 
-Diferentes aplicações, como as voltadas para IoT, saúde e seguros, podem ser integradas ao chaincode. Conforme exemplificado na Figura 25, o chaincode pode ser executado como um contrato inteligente, ao mesmo tempo que oferece conectividade com diferentes APIs. A execução de um contrato inteligente requer algumas etapas primárias na rede blockchain. Em primeiro lugar, o chaincode é executado a partir do Chaincode Developer Kit (CDK), depois os contratos inteligentes são entregues aos nós endorsers que realmente endossam a validade do contrato e permitem ainda a execução do contrato. Depois de confirmar a legitimidade do titular do contrato. Depois disso, o chaincode transfere a transação para os nós orderes que a combinam e geram os blocos de acordo com o tamanho de bloco predefinido. São computados os hashes dos blocos que depois são adicionados à cadeia por meio do mecanismo de consenso. O status do livro razão é mantido consistentemente desta forma usando Byzantine Fault Tolerance (BFT), Kafka, Solo etc. (ALI SYED et al., 2019).
+O Hyperledger Fabric possibilita a integração de diferentes domínios de aplicação, incluindo Internet das Coisas, saúde e seguros, por meio do desenvolvimento de contratos inteligentes, denominados \textit{chaincode}. Conforme ilustrado na Figura~\ref{fig:fig5}, o \textit{chaincode} atua como a camada de lógica de negócio, ao mesmo tempo em que oferece conectividade com aplicações externas por meio de APIs.
+
+A execução de um contrato inteligente na rede Hyperledger Fabric segue um fluxo bem definido. Inicialmente, o \textit{chaincode} é desenvolvido e empacotado utilizando o \textit{Chaincode Development Kit} (CDK). Em seguida, os contratos são executados nos nós endossadores, responsáveis por validar a lógica do contrato e endossar a transação. Após o endosso, a transação é encaminhada aos nós ordenadores, que realizam a ordenação das transações e a criação de blocos conforme parâmetros predefinidos. Esses blocos têm seus hashes calculados e são posteriormente adicionados ao livro-razão distribuído por meio do mecanismo de consenso adotado pela rede, garantindo a consistência do estado do ledger \cite{AliSyed2019}.
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=1\linewidth]{images/HPFModel.jpg}
-    \caption{Modelo Hyperledger Fabric}
+    \caption{Modelo da arquitetura Hyperledger Fabric}
     \label{fig:fig5}
 \end{figure}
 
-Com relação aos mecanismos de segurança, o Hyperledger Fabric, apresenta a possibilidade de coletas privadas de dados, e permitem que determinados participantes autorizados acessem apenas dados específicos.
+No que se refere aos mecanismos de segurança, o Hyperledger Fabric oferece suporte a coleções privadas de dados, permitindo que apenas participantes autorizados tenham acesso a subconjuntos específicos de informações, reforçando requisitos de confidencialidade e controle de acesso.
 
-O Fabric está se tornando uma arquitetura de livro razão favorável para aplicações gerais. Ele fornece uma interface de contrato inteligente para o desenvolvimento de aplicativos chamada chaincode. Chaincode pode ser desenvolvido em várias linguagens, como NodeJS, Go, Java, TypeScript. Ele também fornece uma interface Restful para aplicativos existentes se conectarem à rede blockchain, possibilitando o uso de dados off-chain.
-
+De forma geral, o Hyperledger Fabric tem se consolidado como uma arquitetura de livro-razão distribuído adequada para aplicações corporativas. A plataforma disponibiliza uma interface padronizada para desenvolvimento de contratos inteligentes por meio de \textit{chaincode}, compatível com múltiplas linguagens de programação, como Node.js, Go, Java e TypeScript. Além disso, fornece interfaces RESTful que facilitam a integração com aplicações existentes e o uso combinado de dados \textit{on-chain} e \textit{off-chain}.
 
 \section{Implementação}
-O sistema proposto utiliza a tecnologia blockchain Hyperledger Fabric para registrar transações de vendas de apólices de seguro viagem, empregando contratos inteligentes. A solução envolve participantes como a seguradora e a apólice, e sua arquitetura foi desenvolvida para ser flexível e adaptável, permitindo ajustes conforme as necessidades e especificidades de cada aplicação no segmento de seguros.
+
+O sistema proposto utiliza a tecnologia blockchain Hyperledger Fabric para o registro de transações relacionadas à venda de apólices de seguro viagem, por meio da execução de contratos inteligentes. A solução envolve participantes como seguradora e corretor, sendo projetada com uma arquitetura modular e adaptável, capaz de acomodar ajustes conforme as especificidades de diferentes produtos e cenários do setor de seguros.
 
 \subsection{Configuração da Rede Hyperledger Fabric}
-A rede Hyperledger Fabric envolve a infraestrutura necessária para suportar a comunicação e a validação das transações entre os diferentes participantes da rede. Isso inclui a geração de certificados e chaves criptográficas, a definição de políticas de governança e a configuração dos canais de comunicação. Etapas para configuração da rede Hyperledger Fabric:
+
+A configuração da rede Hyperledger Fabric compreende a infraestrutura necessária para suportar a comunicação segura e a validação das transações entre os participantes da rede. Esse processo inclui a geração de identidades criptográficas, a definição de políticas de governança e a configuração dos canais de comunicação. As principais etapas da configuração da rede são descritas a seguir:
+
 \renewcommand{\labelitemi}{\tiny$\bullet$}
 \begin{itemize}
-    \item Geração de artefatos de cripto material: os certificados e chaves criptográficas necessárias para identificar e autenticar todos os participantes da rede, garante a segurança e a integridade das transações com o uso da ferramenta cryptogen conforme indicado por Hyperledger (2020), e habilita a rede blockchain  para testes;
-    \item Definição do arquivo de configuração: permite estruturar a rede, incluindo os canais, as organizações participantes, as políticas de consenso, e as configurações do orderer e do peer. Este arquivo de configuração também define como os componentes da rede se comunicam e interagem entre si;
-    \item Criação de contêineres Docker: os peers, orderers e CA com o uso do Docker Compose são os componentes necessários da rede;
-    \item Iniciar os contêineres: considera os serviços configurados no Docker Compose para que a rede Hyperledger Fabric esteja pronta para operação.
+    \item \textit{Geração de artefatos criptográficos}: criação de certificados e chaves criptográficas para identificação e autenticação dos participantes, garantindo a segurança e a integridade das transações. Esse processo é realizado com a ferramenta \textit{cryptogen}, conforme as diretrizes do Hyperledger Fabric~\cite{Hyperledger2020};
+    
+    \item \textit{Definição dos arquivos de configuração}: estruturação da rede, incluindo organizações participantes, canais, políticas de consenso e configurações de peers e orderers, bem como as regras de comunicação entre os componentes;
+    
+    \item \textit{Criação dos contêineres Docker}: instanciação dos componentes da rede, como peers, orderers e autoridade certificadora (CA), por meio do Docker Compose;
+    
+    \item \textit{Inicialização dos contêineres}: ativação dos serviços definidos, tornando a rede Hyperledger Fabric operacional.
 \end{itemize}
 \renewcommand{\labelitemi}{\textbullet}
-
 
 \subsection{Implementação do Contrato Inteligente}
-O desenvolvimento do contrato inteligente considera uma operação que envolve uma apólice de seguro-viagem atendendo a estrutura para o contrato de seguro que possa ser armazenado e manipulado na rede blockchain.
 
-A classe Eligibility é responsável por validar as operações de criação, atualização e cancelamento de apólices de seguro. Ela contém os métodos, indicados a seguir, que verificam se os dados fornecidos são válidos e se as regras de negócio são respeitadas.
+O desenvolvimento do contrato inteligente abrange operações relacionadas ao ciclo de vida de uma apólice de seguro viagem, incluindo criação, atualização, consulta e cancelamento, de maneira compatível com a estrutura requerida para o armazenamento e a manipulação dos dados em uma blockchain.
 
-\renewcommand{\labelitemi}{\tiny$\bullet$}
-\begin{itemize}
-    \item Validate policy creation: valida a criação de uma apólice verificando datas, destino e número de passageiros;
-    \item Validate  policy update: valida a atualização de uma apólice verificando o novo status;
-    \item Validate policy cancellation: valida o cancelamento de uma apólice verificando se está ativa para que possa ser cancelada.
-\end{itemize}
-\renewcommand{\labelitemi}{\textbullet}
-
-A classe Policy é um contrato inteligente que gerencia apólices de seguro. Ela contém métodos para criar, consultar, listar, atualizar e cancelar apólices, além de calcular reembolsos.
-
-% \begin{figure}
-%     \centering
-%     \includegraphics[width=1\linewidth]{images/SmartContract.png}
-%     \caption{Enter Caption}
-%     \label{fig:placeholder}
-% \end{figure}
+A classe \texttt{Eligibility} é responsável pela validação das operações associadas às apólices, garantindo a conformidade com as regras de negócio estabelecidas. Os principais métodos dessa classe incluem:
 
 \renewcommand{\labelitemi}{\tiny$\bullet$}
 \begin{itemize}
-    \item Init: inicializa o chaincode;
-    \item Create policy: cria apólice a partir de um JSON;
-    \item Query policy: consulta uma apólice pelo ID;
-    \item Query all policies: lista todos os IDs de apólices;
-    \item Query by holder document id: consulta apólices pelo documento do titular;
-    \item Update policy status: atualiza o status de uma apólice;
-    \item Cancel policy: cancela uma apólice e processa o reembolso;
-    \item Calculate refund: calcula o valor do reembolso com base na data de cancelamento e no prêmio.
+    \item \textit{Validate policy creation}: valida a criação de uma apólice, verificando critérios como datas da viagem, destino e número de passageiros;
+    \item \textit{Validate policy update}: valida a atualização da apólice, verificando a consistência do novo estado;
+    \item \textit{Validate policy cancellation}: valida o cancelamento, assegurando que a apólice esteja ativa e elegível para essa operação.
 \end{itemize}
 \renewcommand{\labelitemi}{\textbullet}
 
-As transações específicas, como a compra do seguro e processamento das regras envolvidas, como a criação de uma apólice verificando datas, destino e número de passageiros para validação e registro corretamente na blockchain foi desenvolvido com a linguagem de programação JAVA.
-
-As classes usadas para representar e manipular dados relacionados a apólices de seguro dentro do contrato inteligente na rede Hyperledger Fabric são descritas a seguir:
+A classe \texttt{Policy} implementa o contrato inteligente responsável pelo gerenciamento das apólices de seguro, disponibilizando métodos para a manipulação e consulta dos registros persistidos na blockchain, conforme detalhado a seguir:
 
 \renewcommand{\labelitemi}{\tiny$\bullet$}
 \begin{itemize}
-    \item InsuranceProduct.java: a classe InsuranceProduct representa um produto de seguro, contendo informações sobre a cobertura e o valor segurado;
-    \item TravelInfo.java: a classe TravelInfo representa informações de viagem associadas a uma apólice de seguro e armazena detalhes da viagem, como destino, datas de início e término, e número de passageiros;
-    \item Refund.java: a classe Refund representa um reembolso associado ao cancelamento de uma apólice de seguro, representa os detalhes de um reembolso, incluindo o ID da apólice, o titular da apólice, o valor do reembolso e o status da apólice;
-    \item Policy.java: a classe Policy representa uma apólice de seguro, contendo informações detalhadas sobre a apólice, o titular, o produto de seguro, os passageiros e as informações de viagem;
-    \item Passenger.java: a classe Passenger representa um passageiro associado a uma apólice de seguro, incluindo detalhes pessoais como nome, documento, data de nascimento, e informações de contato.
-    \item Essas classes são usadas em conjunto para representar e manipular dados relacionados a apólices de seguro dentro de um contrato inteligente na rede Hyperledger Fabric. Elas permitem a criação, validação, atualização e cancelamento de apólices, bem como a serialização e desserialização de dados para armazenamento e recuperação na blockchain.
+    \item \textit{Init}: inicializa o \textit{chaincode};
+    \item \textit{Create policy}: cria uma nova apólice a partir de uma estrutura JSON;
+    \item \textit{Query policy}: consulta uma apólice pelo identificador único;
+    \item \textit{Query all policies}: lista os identificadores de todas as apólices registradas;
+    \item \textit{Query by holder document id}: consulta apólices associadas ao documento do titular;
+    \item \textit{Update policy status}: atualiza o estado da apólice;
+    \item \textit{Cancel policy}: realiza o cancelamento da apólice e inicia o processamento do reembolso;
+    \item \textit{Calculate refund}: calcula o valor do reembolso com base na data de cancelamento e no prêmio contratado.
 \end{itemize}
 \renewcommand{\labelitemi}{\textbullet}
 
-Essas classes são usadas em conjunto para representar e manipular dados relacionados a apólices de seguro dentro de um contrato inteligente na rede Hyperledger Fabric. Elas permitem a criação, validação, atualização e cancelamento de apólices, bem como a serialização e desserialização de dados para armazenamento e recuperação na blockchain.
+As transações associadas à contratação do seguro e à aplicação das regras de negócio — tais como validação de datas, verificação do destino e conferência do número de passageiros — foram implementadas em linguagem Java, de modo a garantir a compatibilidade com a plataforma Hyperledger Fabric e a eficiência na execução dos contratos inteligentes.
+
+As classes empregadas para a representação e a manipulação dos dados das apólices no âmbito do contrato inteligente são apresentadas e descritas a seguir:
+
+\renewcommand{\labelitemi}{\tiny$\bullet$}
+\begin{itemize}
+    \item \texttt{InsuranceProduct.java}: representa o produto de seguro, incluindo informações de cobertura e valor segurado;
+    \item \texttt{TravelInfo.java}: armazena informações da viagem, como destino, datas de início e término e número de passageiros;
+    \item \texttt{Refund.java}: representa os dados associados ao reembolso, incluindo identificador da apólice, titular, valor e status;
+    \item \texttt{Policy.java}: modela a apólice de seguro, reunindo informações do titular, produto, passageiros e dados da viagem;
+    \item \texttt{Passenger.java}: representa um passageiro vinculado à apólice, contendo dados pessoais e informações de identificação.
+\end{itemize}
+\renewcommand{\labelitemi}{\textbullet}
+
+Essas classes são utilizadas de forma integrada para permitir a criação, validação, atualização e cancelamento de apólices, bem como a serialização e desserialização dos dados para armazenamento e recuperação segura no livro-razão distribuído da blockchain.
+
 
 \subsection{Interface para Integração}
 
@@ -429,7 +369,9 @@ A classe WalletService é responsável por gerenciar a carteira de identidades d
 
 \subsection{Frontend para interação de usuários}
 
-O desenvolvimento da aplicação web teve como finalidade viabilizar a interação de usuários com uma rede blockchain voltada à gestão de apólices de seguro-viagem. Desenvolvida com a biblioteca React, a solução proporcionou funcionalidades como a criação, a consulta de status e o cancelamento de apólices de forma segura e transparente. A comunicação entre o frontend e a rede blockchain ocorreu por meio de uma API backend, a qual foi responsável por intermediar as requisições e garantir a correta execução das operações junto aos contratos inteligentes. A Figura \ref{fig:fig6}, apresentada a seguir, exibe a tela para executar o processo de criação de apólice, assim como os menus que permite executar os processos de busca e cancelamento de apólice.
+O desenvolvimento da aplicação web teve como objetivo permitir a interação de usuários com uma rede blockchain para gestão de apólices de seguro‑viagem. Implementada com a biblioteca React, oferece criação, consulta de status e cancelamento de apólices, garantindo maior segurança, rastreabilidade e transparência nas operações.
+
+A comunicação entre o frontend e a blockchain ocorre por meio de uma API backend, que intermedeia as requisições, converte os dados para formatos compatíveis com a rede e assegura a correta execução das transações nos contratos inteligentes. A Figura \ref{fig:fig6} apresenta a interface para criação de apólices e os menus para consulta e cancelamento.
 
 \begin{figure}[h]
     \centering
@@ -443,44 +385,44 @@ Os procedimentos para construir e executar o frontend, apresentado na Figura \re
 \subsection{Ambiente de execução}
 %2.3.6	Resultado da Implementação da Prova de Conceito
 
-A Figura \ref{fig:fig7}, mostra a lista de containers em execução, cada um dos containers, indicados a seguir, representa um componente diferente do sistema de vendas de apólices de seguro.
+A Figura \ref{fig:fig7} apresenta os containers em execução, cada um implementando um componente do sistema de vendas de apólices de seguro.
 
 \renewcommand{\labelitemi}{\tiny$\bullet$}
 \begin{itemize}
-    \item dev-insurance-sales-api: este container executa a API de vendas de seguros, que é responsável por receber as solicitações de compra de apólices dos usuários;
-    \item dev-peer0.org2.example.com-insurance-chaincode: este container representa um peer da organização 2, que executa o contrato inteligente relacionado ao seguro. Ele participa da validação das transações;
-    \item dev-peer0.org1.example.com-insurance-chaincode: similar ao anterior, este container representa um peer da organização 1, que também executa o contrato inteligente relacionado ao seguro e participa da validação das transações;
-    \item cli: este container executa ferramentas de linha de comando do Hyperledger Fabric, usadas para interagir com a rede blockchain;
-    \item peer0.org2.example.com: este container representa um peer da organização 2, que mantém uma cópia do ledger e participa do processo de consenso;
-    \item peer0.org1.example.com: este container representa um peer da organização 1, que também mantém uma cópia do ledger e participa do processo de consenso;
-    \item orderer.example.com: este container executa o serviço de ordenação do Hyperledger Fabric, que é responsável por ordenar as transações e adicioná-las ao ledger;
-    \item couchdb0 e couchdb1: estes containers executam instâncias do CouchDB, que são usadas como bancos de dados para armazenar o estado global dos peers, permitindo consultas eficientes.
-    \item ca\_org2, ca\_org1 e ca\_orderer: estes containers executam as Autoridades de Certificação (CAs) para as organizações 1 e 2, e para o serviço de ordenação, respectivamente. Eles são responsáveis por emitir certificados de identidade para os componentes da rede.
+    \item dev-insurance-sales-api: executa a API de vendas de seguros, responsável por receber e processar requisições de compra de apólices;
+    \item dev-peer0.org2.example.com-insurance-chaincode: peer da organização 2, no qual é instanciado e executado o chaincode de seguro, participando da validação e do endosso das transações;
+    \item dev-peer0.org1.example.com-insurance-chaincode: peer da organização 1, também responsável pela execução do chaincode de seguro e pela validação e endosso das transações;
+    \item cli: disponibiliza as ferramentas de linha de comando do Hyperledger Fabric para gerenciamento, configuração e interação com a rede;
+    \item peer0.org2.example.com: peer da organização 2, que mantém cópia do ledger e participa do protocolo de consenso;
+    \item peer0.org1.example.com: peer da organização 1, que igualmente mantém cópia do ledger e integra o processo de consenso;
+    \item orderer.example.com: executa o serviço de ordenação do Hyperledger Fabric, ordenando transações, agrupando-as em blocos e submetendo-as ao ledger;
+    \item couchdb0 e couchdb1: executam instâncias CouchDB usadas como bancos de dados de estado dos peers, armazenando o estado global e viabilizando consultas eficientes e complexas;
+    \item ca\_org2, ca\_org1 e ca\_orderer: executam as Autoridades Certificadoras das organizações 1, 2 e do serviço de ordenação, responsáveis por emitir, gerenciar e revogar certificados de identidade e chaves criptográficas.
 \end{itemize}
 \renewcommand{\labelitemi}{\textbullet}
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=1\linewidth]{images/containers.png}
-    \caption{Containers implementados para ambiente de execução}
+    \caption{Containers implementados para o ambiente de execução}
     \label{fig:fig7}
 \end{figure}
 
-Cada um desses containers desempenha uma função essencial na operação e na manutenção da rede blockchain, assegurando que as transações relativas às apólices de seguro sejam tratadas de forma segura, confiável e eficiente, em conformidade com os requisitos de integridade, rastreabilidade e desempenho do sistema distribuído.
+Esses containers viabilizam a operação e manutenção da rede blockchain, garantindo o processamento seguro, confiável e eficiente das transações de apólices de seguro, em conformidade com requisitos de integridade, rastreabilidade, disponibilidade e desempenho de um sistema distribuído baseado em razão distribuída.
 
 \section{Resultados}
-Nesta seção, são apresentados e discutidos os resultados obtidos nos testes conduzidos para validar a segurança nas transações de venda de apólices de seguros e a eficiência do sistema, com ênfase em sua estabilidade diante do aumento do volume de transações. Os resultados foram analisados de modo a verificar a eficácia dos mecanismos de controle de fraude por meio da detecção de duplicação de transações, confirmando que o contrato inteligente implementa funcionalidades capazes de identificar e rejeitar transações redundantes. Adicionalmente, foram examinados fatores relacionados ao desempenho do sistema, como a taxa de processamento medida em número de transações por segundo.
+Nesta seção, são apresentados e discutidos os resultados dos testes de validação da segurança nas transações de venda de apólices de seguros e da eficiência do sistema, com ênfase em sua estabilidade frente ao aumento do volume de transações. Os resultados foram analisados para verificar a eficácia dos mecanismos de controle de fraude por detecção de duplicação de transações, confirmando que o contrato inteligente identifica e rejeita transações redundantes. Também foram avaliados fatores de desempenho, como a taxa de processamento em transações por segundo.
 
-Cada cenário de teste é descrito de forma a explicitar os desafios enfrentados e as soluções adotadas durante a execução da transação de criação de apólices. A análise busca identificar de que maneira variáveis, tais como o volume de transações e os mecanismos de controle, influenciam o desempenho e a segurança do sistema. Os resultados são discutidos com foco nas transações de venda de apólices de seguros e na avaliação da viabilidade técnica da arquitetura proposta.
+Cada cenário de teste é descrito para explicitar os desafios enfrentados e as soluções adotadas na criação de apólices. A análise busca identificar como variáveis como volume de transações e mecanismos de controle influenciam o desempenho e a segurança do sistema. Os resultados são discutidos com foco nas transações de venda de apólices de seguros e na avaliação da viabilidade técnica da arquitetura proposta.
 
 \subsection{Análise de Segurança}
-A integridade da apólice de seguro constitui requisito fundamental para assegurar a confiabilidade, a segurança e a imutabilidade das informações registradas na blockchain. Com o objetivo de avaliar a capacidade do sistema em proteger a apólice contra acessos não autorizados e contra adulterações, foram elaborados três cenários de teste que analisam distintos aspectos relacionados à segurança e à proteção dos dados na rede Hyperledger Fabric.
+A integridade da apólice de seguro é requisito fundamental para garantir a confiabilidade, a segurança e a imutabilidade das informações na blockchain. Para avaliar a capacidade do sistema em protegê-la contra acessos não autorizados e adulterações, foram definidos três cenários de teste que analisam diferentes aspectos de segurança e proteção de dados na rede Hyperledger Fabric.
 
-Os cenários apresentados na Table \ref{tab:tab1} têm como finalidade verificar se as políticas de autenticação e autorização estão corretamente implementadas, bem como se o sistema mantém a consistência dos dados armazenados na blockchain, impedindo modificações indevidas. Busca-se, assim, avaliar a capacidade do sistema em salvaguardar a apólice de seguro contra acessos não autorizados e adulterações, garantindo que esta permaneça íntegra ao longo de todas as etapas do processo.
+Os cenários da Tabela \ref{tab:tab1} verificam se as políticas de autenticação e autorização estão corretamente implementadas e se o sistema mantém a consistência dos dados na blockchain, impedindo modificações indevidas. Assim, avalia-se a capacidade do sistema em salvaguardar a apólice ao longo de todas as etapas do processo.
 
-Os cenários de teste permitiram validar se a aplicação preserva a segurança e a integridade das apólices de seguro, prevenindo acessos indevidos e alterações não autorizadas. Por meio dessa abordagem, foi possível evidenciar que os contratos armazenados na blockchain mantêm-se confiáveis, imutáveis e acessíveis exclusivamente aos participantes devidamente autorizados pelo sistema.
+Os testes validaram que a aplicação preserva a segurança e a integridade das apólices, prevenindo acessos e alterações não autorizados. Confirmou-se que os contratos armazenados na blockchain permanecem confiáveis, imutáveis e acessíveis apenas a participantes autorizados.
 
-Os testes comprovam a eficácia da aplicação na proteção e controle de apólices de seguro: no Cenário 1, as 50 tentativas de modificação não autorizada foram bloqueadas; no Cenário 2, todas as transações legítimas foram processadas corretamente; e no Cenário 3, 50 tentativas de acesso indevido foram impedidas e registradas como eventos suspeitos, confirmando a integridade e a segurança do sistema.
+Os resultados demonstram a eficácia da aplicação no controle das apólices: no Cenário 1, as 50 tentativas de modificação não autorizada foram bloqueadas; no Cenário 2, todas as transações legítimas foram processadas corretamente; e no Cenário 3, 50 tentativas de acesso indevido foram impedidas e registradas como eventos suspeitos, comprovando a integridade e a segurança do sistema.
 
 \begin{sidewaystable}%
 \centering
@@ -542,7 +484,7 @@ As tentativas de acesso indevido foram bloqueadas com sucesso e devidamente regi
 
 Esta subseção apresenta uma avaliação do desempenho do processo de comercialização de apólices de seguro, em termos de tempo de resposta, para a arquitetura proposta. O objetivo é identificar de que forma o número de transações por segundo e os volumes de dados influenciam o comportamento do sistema em condições operacionais reais.
 
-A análise de desempenho tem como finalidade mensurar a eficiência da aplicação voltada à venda de apólices de seguro, considerando tanto o tempo de resposta quanto a escalabilidade do sistema sob diferentes perfis de carga de trabalho. Os testes descritos na Tabele \ref{tab:tab2} foram concebidos para quantificar a capacidade do sistema de processar transações em alta taxa e sob grandes volumes de dados, assegurando um funcionamento adequado em cenários de uso realista.
+A análise de desempenho tem como finalidade mensurar a eficiência da aplicação voltada à venda de apólices de seguro, considerando tanto o tempo de resposta quanto a escalabilidade do sistema sob diferentes perfis de carga de trabalho. Os testes descritos na Tabela \ref{tab:tab2} foram concebidos para quantificar a capacidade do sistema de processar transações em alta taxa e sob grandes volumes de dados, assegurando um funcionamento adequado em cenários de uso realista.
 
 Os três cenários de teste permitiram avaliar de maneira sistemática a eficiência e a escalabilidade do sistema em distintas condições operacionais, verificando se a aplicação descentralizada é capaz de suportar altas cargas de transações, grandes volumes de dados e executar consultas de forma eficiente.
 
